@@ -9,6 +9,8 @@ project 1 - A Random Quote Generator
 
 /*** 
  * `quotes` array 
+ * This array literal contains the repository for all the quotes to be used in the rand-quote generator: Each indexed object contains a quote, source, citation, and year.
+ * Purpose: supply the getRandomQuote function.
 ***/
 let quotes = [{quote: "Frankly, my dear, I don't give a damn.",
                source: "Clark Gable",
@@ -65,23 +67,29 @@ let quotes = [{quote: "Frankly, my dear, I don't give a damn.",
 
 /***
  * `getRandomQuote` function
+ * this function RETURNS a random quote(an object literal, which contains quote, source, etc.) from the quotes array.
+ * Mechanic: Generates a random integer between 0 and the quotes array's length, and then uses it as an index to pull a random quote object from the array.
 ***/
-let getRandomObject = () =>  quotes[Math.floor(Math.random() * quotes.length)];
+let getRandomQuote = () =>  quotes[Math.floor(Math.random() * quotes.length)];
 
 /***
  * `printQuote` function
+ * 
+ * this function invokes getRandomQuote(), which returns a random object from the quotes array.
+ * this function then takes an html element by the id of 'quote-box' and changes its innerHTML content using information from the random object it just pulled.
 ***/
 function printQuote () {
-  let getRandomQuote = getRandomObject();
+  let quoteObject = getRandomQuote();
   let quoteBox = document.getElementById('quote-box');
-  quoteBox.innerHTML= `<p class="quote">${getRandomQuote.quote}</p>
-  <p class="source">${getRandomQuote.source}<span class="citation">${getRandomQuote.citation}</span><span class="year">${getRandomQuote.year}</span></p>`;
+  quoteBox.innerHTML= `<p class="quote">${quoteObject.quote}</p>
+  <p class="source">${quoteObject.source}<span class="citation">${quoteObject.citation}</span><span class="year">${quoteObject.year}</span></p>`;
 }
 
 
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
+ * This code attaches an event listener to an html element id'd as 'load-quote'; upon click, element will call printQuote(), which in turn will call upon getRandomQuote(), and present a new, random quote and its accompanying details to the html body.
 ***/
 
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
