@@ -7,11 +7,11 @@ class Game {
     // Constructs a game by providing 3 properties: score, a list of phrases, and the one to be used.
     constructor(missed, phrases, activePhrase){
         this.missed = 0;
-        this.phrases = ["how are you", 
-                        "sayonara", 
-                        "hello and goodbye", 
-                        "long live the king", 
-                        "sunny side up"];
+        this.phrases = [new Phrase("how are you"), 
+                        new Phrase("sayonara"), 
+                        new Phrase("hello and goodbye"), 
+                        new Phrase("long live the king"), 
+                        new Phrase("sunny side up")];
         this.activePhrase = null;
     }
 
@@ -30,7 +30,7 @@ class Game {
         // then passes it into a Phrase class constructor
         let phraseArr = this.phrases;
         let randomNum = Math.floor(Math.random() * phraseArr.length)
-        return new Phrase(phraseArr[randomNum])
+        return phraseArr[randomNum]
     }
 
     handleInteraction (clicked){
@@ -44,7 +44,9 @@ class Game {
         if(phraseObj.checkLetter(clicked.textContent)){
             clicked.classList.add('chosen');
             phraseObj.showMatchedLetter(clicked);
-            this.checkForWin();
+            if(this.checkForWin()){
+                this.gameOver('win');
+            }
         } else {
             // checks heart points to see if there is gameover
             clicked.classList.add('wrong');
@@ -75,7 +77,7 @@ class Game {
         let array = Array.from(div)
         let remaining = array.filter(li => li.classList.contains('hide')).length
         if(remaining == 0){
-            this.gameOver("win")
+            return true
         }
     }
 
