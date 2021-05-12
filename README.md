@@ -1,7 +1,7 @@
-# Techdegree project number 4
+# Techdegree project number 5 Public API Request
 
-Resubmitting: Made changes as instructed.
+Submitting Project: Aiming for Exceeds expectation, but will settle for less.
 
-The huge keyboard issue should be resolved; it no longer fires after the initial input, as it checks the Dom node for the disabled attribute to be false first.
+A modal window has a close button, and next and back buttons. No errors are logged when a user reaches the beginning of the list or end.
 
-On another note: the game is personalized, changing background color every 3 seconds... as a way of distracting the player from his/her concentration.
+When Modal window is visible, the background takes on a purplish/pink hue.
