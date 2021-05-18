@@ -1,0 +1,18 @@
+extends layout.pug
+
+block content
+
+  article.portfolio-intro
+    h1 My Portfolio
+    p The work I've done on TeamTreeHouse. Hope you're impressed!
+
+
+  article.portfolio-project-thumbs
+    .projects-box.box.grid
+
+      
+      each project in projects 
+        .cell 
+          a(href=`/project/${project.id}`)
+            img.thumbnail(src=project.image_urls[0])
+            h5= project.project_name 
