@@ -1,10 +1,10 @@
-# Techdegree project number 6 Express Site
+# Techdegree project number 7 React Gallery App
 
 Submitting Project 7: Aiming for Exceeds expectation, but will settle for less.
 
-* App can be started via running rpm start
+* App can be started via running npm start
 
-* In order to begin using app, first replace the api_key variable in the App.js file with your own personal api key from Flickr. Be sure to remove the import apiKey function from the config file.
+* In order to begin using app, first replace the api_key variable in the App.js file with your own personal api key from Flickr. Be sure to remove the import apiKey function from the config file. Or you can create a config file inside the src folder that exports an api key.
 
 * Three mainstay search options: cats, dogs, and computers are always available for use, unless you run into an unsupported route, which will display a 404 notice page.
 
