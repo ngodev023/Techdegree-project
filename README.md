@@ -1,13 +1,19 @@
-# Techdegree project number 7 React Gallery App
+# Techdegree project number 8 MySql Library Manager
 
-Submitting Project 7: Aiming for Exceeds expectation, but will settle for less.
+Submitting Project 8: Aiming for Exceeds expectation, but will settle for less.
 
 * App can be started via running npm start
 
-* In order to begin using app, first replace the api_key variable in the App.js file, which is currently supposed to hold a string value that is an api key, with your own personal api key from Flickr. BE SURE TO REMOVE THE IMPORT FUNCTION TRYING TO LOOK FOR A CONFIG FILE IF YOU WANT TO USE THIS METHOD.
+* When app first loads, visiting the root directory will log to the console all books in the library db
+	- app will then redirect user to the /books route, where all books in the library db have been sorted by year, desc, followed by author and title, asc
 
-* Or you can create a config file inside the src folder that exports an api key. Be sure to establish this file inside the src directory, as react doesn't allow import from outside src.
+* All books are present in the /books route, but only 5 will appear at a time due to pagination. Clinking each link at the bottom of the app will sift through the book items
+	but the route will not change, as all titles are actually already present at /books route at the initial rendering of the view.
 
-* Three mainstay search options: cats, dogs, and computers are always available for use, unless you run into an unsupported route, which will display a 404 notice page.
+* Search bar near the top of the /books route will filter based on title, author, year, etc... Case insensitive. Pagination denomination still applies.
 
-* Back, forward, and Refresh buttons can be used; fetched data query is preserved each time.
+* visiting nonexistent pages will all throw a 404 error in the console, and render a page-not-found template.
+
+* In order to invoke a 500 status code error, visit /customerror route.
+
+* Enjoy. 
