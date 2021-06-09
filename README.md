@@ -1,19 +1,12 @@
-# Techdegree project number 8 MySql Library Manager
+# Techdegree project number 9 REST API with Express
 
-Submitting Project 8: Aiming for Exceeds expectation, but will settle for less.
+Submitting Project 9: Aiming for Exceeds expectation, but will settle for less.
 
-* App can be started via running npm start
+* Api can be started via running npm start, which then proceeds to run at http://localhost:5000
+* Connection to DataBase Successful will be logged into the console... like a needle in a haystack.
 
-* When app first loads, visiting the root directory will log to the console all books in the library db
-	- app will then redirect user to the /books route, where all books in the library db have been sorted by year, desc, followed by author and title, asc
+* database has already been emptied, awaiting user to run npm run seed
 
-* All books are present in the /books route, but only 5 will appear at a time due to pagination. Clinking each link at the bottom of the app will sift through the book items
-	but the route will not change, as all titles are actually already present at /books route at the initial rendering of the view.
+* I've checked out the POSTMAN JSON collection and ran each request, and they've produced the desired results. 
 
-* Search bar near the top of the /books route will filter based on title, author, year, etc... Case insensitive. Pagination denomination still applies.
-
-* visiting nonexistent pages will all throw a 404 error in the console, and render a page-not-found template.
-
-* In order to invoke a 500 status code error, visit /customerror route.
-
-* Enjoy. 
+* There's an odd feature associated with the create course route: When a user creates a course, he/she may choose to leave out the userId input in the request body, but the api will automatically assign the user's id for him/her. If a user then wants to reassign the course to another user, he can do so via a PUT/update request, by setting the userId to another's--heck, he could do that while setting up the course... at least on Postman. Having looked forward to Project 10, I don't think a situation like this will ever arise as the ui for public clients won't allow them to meddle with the userId of a course being generated, but I hope it doesn't hurt to leave this in the code.
