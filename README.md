@@ -1,12 +1,30 @@
-# Techdegree project number 9 REST API with Express
+# Techdegree project number 10 React App with Restful Api
 
-Submitting Project 9: Aiming for Exceeds expectation, but will settle for less.
+Submitting Project 10: Aiming for Exceeds expectation, but will settle for less.
 
-* Api can be started via running npm start, which then proceeds to run at http://localhost:5000
-* Connection to DataBase Successful will be logged into the console... like a needle in a haystack.
+* Upon downloading project file, user should open up a cli and change into the api directory and run npm start to start up the database api which will run at http://localhost:5000
 
-* database has already been emptied, awaiting user to run npm run seed
+* user should then open up another command line at the root of the project directory, change into the client directory, which is adjacent to the api directory and run npm start again, which will host a react application, accessible via browser at http://localhost:3000
 
-* I've checked out the POSTMAN JSON collection and ran each request, and they've produced the desired results. 
+* api has been modified to allow cross origins resource sharing, and header locations have been configured to be accessible in the response
 
-* There's an odd feature associated with the create course route: When a user creates a course, he/she may choose to leave out the userId input in the request body, but the api will automatically assign the user's id for him/her. If a user then wants to reassign the course to another user, he can do so via a PUT/update request, by setting the userId to another's--heck, he could do that while setting up the course... at least on Postman. Having looked forward to Project 10, I don't think a situation like this will ever arise as the ui for public clients won't allow them to meddle with the userId of a course being generated, but I hope it doesn't hurt to leave this in the code.
+* user can go ahead and sign up for an account with any unused email address and begin creating courses.
+
+* Signing up with qualifiable information will automatically sign the user in--user's first and last name will appear in the header, alongside the sign-out option so long as the user remains logged in.
+	- follow the validation error instructions to rectify your information inputs if you run into any error
+
+* User should arrive at the courses listing upon accessing localhost:3000
+
+* User should be able to view the course details on any course, whether logged in or out
+
+* User can choose to create a course, a feature which requires that a user is logged in and authenticated; user will be redirected to signing screen to sign in; and then redirected to whichever page user was on after a successful sign-in
+
+* Once again, trying to create a course with insufficient information will result in validation errors becoming visible to the user; follow these instructions to rectify your inputs if you run into any error
+
+* Once a course has been successfully created, client will be redirected to the course detail page of the newly created course... no need to go back to the course listing page and look for it.
+
+* A course detail page will make the option to edit or delete the course visible--if the logged in user is the owner of the course--trying to access this feature by messing with the url will result in a forbidden error
+
+* Editing a course follows the same validation rules as creating a course. Follow the message's instructions if you run into any error
+
+* Enjoy!

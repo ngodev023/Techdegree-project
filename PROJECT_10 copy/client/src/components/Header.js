@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default (props) => {
+// This header component will linger above each route in the program, and will display user or lackthereof based on inform it extracts from Context.js
+// Header is a stateless component, so access of props is simply props, not this.props
+// Header will display signup and signin if user is not signed in; and signout if user is already signed in
+const Header = (props) => {
   
     // getting the authentication status from Provider component
     const {context} = props;
@@ -33,3 +36,4 @@ export default (props) => {
     );
   };
 
+  export default Header;

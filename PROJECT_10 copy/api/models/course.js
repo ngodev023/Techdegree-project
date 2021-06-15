@@ -1,6 +1,6 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcryptjs');
+//const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize) => {
     class Course extends Model {}
@@ -33,9 +33,9 @@ module.exports = (sequelize) => {
                     msg: 'Please provide a description for the course'
                 },
                 len: {
-                    args: [10, 100],
-                    msg: 'The description should be between 10 and 100 characters in length'
-                  }
+                    args: [10,],
+                    msg: 'The description should be at least 10 characters in length'
+                }
             }
         },
         estimatedTime: {

@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
+// Looks like user wants to join the party...
 export default class UserSignUp extends Component {
+
+  // initiate the following properties in state... essentially the required information for signing up as a new user.
   state = {
     firstName: '',
     lastName: '',
@@ -13,6 +16,7 @@ export default class UserSignUp extends Component {
   }
 
   render() {
+    // destructure the state's properties for ease of use
     const {
       firstName,
       lastName,
@@ -22,6 +26,7 @@ export default class UserSignUp extends Component {
       errors,
     } = this.state;
 
+    // a Form component had been imported for easier form rendering; pass in this instance's methods as props
     return (
       <main className="bounds">
         <div className="form--centered">
@@ -78,7 +83,7 @@ export default class UserSignUp extends Component {
     );
   }
   
-  // changes the inputs' displays as user types.
+  // changes the inputs' displays as user types in real time
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -96,28 +101,35 @@ export default class UserSignUp extends Component {
   }
 
   // submit function--takes ipnuts and uses api method in Data.js to be stored in database
-  // then logs users in and redirects them to previous page they were on.
+  // then logs users in and redirects them to previous page they were on... assuming everything went well.
   submit = async () => {
-    // stuff passed down from the Provider component, such as the ability to make requests to the api folder
+    // stuff passed down from the Provider component, such as the ability to make requests to the api folder; store it in its own variable for ease of use
     const {context} = this.props;
     
-    // stuff currently in the state property... essentially the user inputs.
-    const {firstName, lastName, emailAddress, password} = this.state;
+    // stuff currently in the state property... essentially the user inputs; destructured for ease of use
+    const {firstName, lastName, emailAddress, password, confirmedPassword} = this.state;
 
     // putting the user input data into one neat package called user.
-    // This is essentially going to serve as the body of the request used in Postman.
+    // This is essentially going to serve as the body of the request normally used in Postman.
     const user = {firstName, lastName, emailAddress, password};
 
-    if(this.state.password === this.state.confirmedPassword && password) {
+    // user needs to be certain of his/ her password
+    // only submit if password and confirm password matches up
+    // and only if the password field isn't blank
+    if(password && (password === confirmedPassword)) {
+      // call to api once the necessary data had been provided to see if user can be created with given info
       const response = await context.data.createUser(user);
 
+      // there was a response, let's check it ouf...
       try {
         if (response.status === 201){
-          // if all goes well--> back to courses listing
+          // if all goes well--> initiate a login for user, by accessing context's signIn method
+          // Then it's back to courses listing
           await context.actions.signIn(emailAddress,password);
           this.props.history.push('/');
         } else if(response.status === 400) {
-          // validation errors
+          // validation errors were returned by api
+          // change the errors property in state from a blank array, so component can render it to user
           const errors = await response.json();
           this.setState({
             errors: errors.errors
@@ -136,23 +148,5 @@ export default class UserSignUp extends Component {
         errors: ["Please make sure password and confirm password are a match"]
       })
     }
-      // createUser, located in Data.js returns an array of errors if there are any
-      // .then(errors => {
-      //   if(errors.length) {
-      //     // changes state of component if there are errors; remember state is dynamic
-      //     this.setState({errors});
-      //   } else {
-      //     // If creation of user is successful, automatically sign user in.
-      //     context.actions.signIn(emailAddress, confirmedPassword)
-      //       .then(() => {
-      //         this.props.history.push('/');
-      //       })
-      //   }
-      // }).catch(err => {
-      //   // for connectivity related errors
-      //   console.log(err);
-      //   // redirect user to error page
-      //   this.props.history.push('/error');
-      // })
   }  
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
-export default (props) => {
+// this component renders a Form element 
+const Form = (props) => {
   const {cancel,errors,submit,submitButtonText,elements} = props;
 
   function handleSubmit(event) {
@@ -13,6 +14,7 @@ export default (props) => {
     cancel();
   }
 
+  // User may export this component and provide methods for the form to execute as props
   return (
     <div>
       <ErrorsDisplay errors={errors} />
@@ -27,9 +29,9 @@ export default (props) => {
   );
 }
 
+// Error display measures if there are any errors, and will map them out if length is greater than zero.
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
-
   if (errors.length) {
     errorsDisplay = (
       <div className="validation--errors">
@@ -45,3 +47,5 @@ function ErrorsDisplay({ errors }) {
 
   return errorsDisplay;
 }
+
+export default Form;

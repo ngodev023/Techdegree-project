@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => {
+const NotFound = () => {
     return (
         <main>
             <div className="wrap">
@@ -10,3 +10,5 @@ export default () => {
         </main>
     )
 }
+
+export default NotFound;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => {
+const Forbidden = () => {
     return (
         <main>
             <div className="wrap">
@@ -10,3 +10,4 @@ export default () => {
         </main>
     )
 }
+export default Forbidden;

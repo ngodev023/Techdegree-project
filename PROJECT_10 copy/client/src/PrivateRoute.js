@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Consumer } from './Context';
 
-export default ({ component: Component, ...rest }) => {
+// This component generates a route component, with will only allow access if context. authenticatedUser has a value: line 12
+const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Consumer>
       { context => (
@@ -23,3 +24,5 @@ export default ({ component: Component, ...rest }) => {
     </Consumer>
   );
 };
+
+export default PrivateRoute;

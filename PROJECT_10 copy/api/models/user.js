@@ -84,11 +84,3 @@ module.exports = (sequelize) => {
 
     return User;
 }
-
-// {
-//   "firstName": "James",
-//   "lastName": "Nugen",
-//   "emailAddress": "James@hitmail.com",
-//   "password": "abc123456",
-//   "confirmedPassword": "abc123456"
-// }

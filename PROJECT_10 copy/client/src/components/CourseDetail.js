@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkDown from 'react-markdown';
 
-export default class CourseDetails extends Component {
+export default class CourseDetail extends Component {
+    // initiate class with the following state properties; will assume at first that the user is not owner of course.
     state = {
         courseTitle: '',
         courseId: '',
@@ -16,12 +17,19 @@ export default class CourseDetails extends Component {
         ownerPresent: false
     }
 
+    // upon loading, component will reach out to api, using the provided id query to find a course
     async componentDidMount(){
-        // authentication data resting here...
+        // user's authentication data is acquired here... and will be used to determine if user is owner of course.
         const userAuth = this.props.context.authenticatedUser;
 
+        // store the id of the course user wants to retrieve in a variable
         const courseId = this.props.match.params.id;
+
+        // asyncronously reach out to api for the specified course
         const gottenCourse = await this.props.context.data.getOneCourse(courseId)
+        
+        // upon receiving data from api about course, program will update the state properties.
+        // ownerPresent will evaluate to true if userAuth data matches up with the returned data from api
         if (gottenCourse) {
                 this.setState({
                     courseTitle: gottenCourse.title,
@@ -33,29 +41,34 @@ export default class CourseDetails extends Component {
                     ownerLN: gottenCourse.user.lastName,
                     ownerEmail: gottenCourse.user.emailAddress,
                     ownerId: gottenCourse.user.id,
-                    ownerPresent: userAuth ? userAuth.emailAddress == gottenCourse.user.emailAddress : false
+
+                    // user's current data being compared with queried course data about owner's email address
+                    ownerPresent: userAuth ? userAuth.emailAddress === gottenCourse.user.emailAddress : false
                 })
             } else {
+                // browser will redirect if api/gottenCourse returns null for a response
                 this.props.history.push('/notfound');
             }
     }
 
+    // handles deletion of current course; will ask for confirmation before carrying out deletion
    destroy () {
-    let confirm = window.confirm("This action cannot be undone...")
-    if (confirm) {
-        const {context} = this.props;
-        context.data.deleteCourse(this.state.courseId, context.authenticatedUser.emailAddress, context.authenticatedPassword)
-            .then(result => {
-                if (result == "Course Deleted"){
-                    this.props.history.push('/');
-                }
-            })
-        
-    }
+        let confirm = window.confirm("This action cannot be undone...")
+        if (confirm) {
+            const {context} = this.props;
+            context.data.deleteCourse(this.state.courseId, context.authenticatedUser.emailAddress, context.authenticatedPassword)
+                .then(result => {
+                    if (result === "Course Deleted"){
+                        this.props.history.push('/');
+                    }
+                })
+            
+        }
    }
 
 
     render () {
+        // destructure state's properties for ease of use
         const {
             courseTitle, 
             courseId,
@@ -64,14 +77,13 @@ export default class CourseDetails extends Component {
             courseMaterials, 
             ownerFN, 
             ownerLN, 
-            ownerEmail, 
-            ownerId, 
             ownerPresent} = this.state;
         
-            //const materialArr =courseMaterials.split(',');
+            // this variable will evaluate to either true or false--allowing component to render the edit and delete buttons if owner is present
             const updateGate = ownerPresent ? `/courses/${courseId}/update` : '/forbidden'; 
             
         return (
+            // unfortunately, Form component doesn't render as expected with provided CSS info... will have to build a unique form from scratch
             <main>
                 <div className="actions--bar">
                     <div className="wrap">
@@ -88,23 +100,12 @@ export default class CourseDetails extends Component {
                                 <h3 className="course--detail--title">Course</h3>
                                 <h4 className="course--name">{courseTitle}</h4>
                                 <p>By {`${ownerFN} ${ownerLN}`}</p>
-                                {/* <p>{courseDesc}</p> */}
                                 <ReactMarkDown>{courseDesc}</ReactMarkDown>
                             </div>
                             <div>
                                 <h3 className="course--detail--title">Estimated Time</h3>
                                 <p>{courseTime}</p>
                                 <h3 className="course--detail--title">Materials Needed</h3>
-                                {/* <ul>
-                                    {materialArr[0] != "" ? 
-                                        materialArr.map((item, index) =>{
-                                        return <li key={index}>{item}</li>
-                                        })
-                                        :
-                                        ""
-                                    }
-                                    
-                                </ul> */}
                                 <ReactMarkDown>{courseMaterials}</ReactMarkDown>
                             </div>
                         </div>
