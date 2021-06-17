@@ -100,7 +100,7 @@ export default class UpdateCourse extends Component {
     // sends user back to course listing page
     cancel = (event) => {
         event.preventDefault();
-        this.props.history.push(`/courses/${this.courseId}`);
+        this.props.history.push(`/courses/${this.state.courseId}`);
       }
 
     // finally, let's render
